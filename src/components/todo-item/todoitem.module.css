@@ -50,3 +50,24 @@
     box-shadow: 0 0 15px green, 0 0 30px green, 0 0 45px green, 0 0 60px green;
   }
 }
+
+
+
+.virtualEdit {
+  
+    background-color:transparent;
+    border: 1px solid  #9e78cf;
+    border-radius: 3px;
+    color: #fff;
+    height: 20px;
+  }
+
+
+  .saveBtn{
+    background-color: rgb(100, 95, 240) !important;
+    transition: 0.2s;
+    &:hover {
+      background-color: green !important;
+      box-shadow: 0 0 15px green, 0 0 30px green, 0 0 45px green, 0 0 60px green;
+    }
+  }
