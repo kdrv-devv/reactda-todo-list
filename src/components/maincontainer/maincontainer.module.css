@@ -91,6 +91,7 @@ input {
     box-shadow: 0 0 15px #9e78cf, 0 0 30px #9e78cf, 0 0 45px #9e78cf,
       0 0 60px #9e78cf;
     text-shadow: 0 0 10px #fff;
+    transform: rotate(90deg);
   }
   &:active {
     background: #502f7b;

@@ -5,7 +5,7 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Todoitem = () => {
   const [localData, setlocalData] = useState([]);
-
+  const [editmi, isEditmi] = useState(null);
   useEffect(() => {
     const storedData = localStorage.getItem("data");
     if (storedData) {
@@ -18,42 +18,45 @@ const Todoitem = () => {
   }, []);
 
   const deleteData = (id) => {
-    let dataNew = localData.filter((item) => item.id !== id);
-
+    const dataNew = localData.filter((item) => item.id !== id);
+    setlocalData(dataNew);
     localStorage.setItem("data", JSON.stringify(dataNew));
   };
-
-//   todoni taxrirlash uchun
-//   const editData =(id)=>{
-//     let inputUSer = prompt("Yangi malumot kiriting:")
-//     console.log(inputUSer.length);
-    
-//     if(inputUSer.length === 0){
-//         alert("Xavotir olmang tekshirilgan ")
-//     }else{
-//         let editData = localData.map((item) => item.id === id ? item.name = inputUSer:item.name );
-//         console.log(editData);
-        
-//         localStorage.setItem("data", JSON.stringify(editData));
-//     }
- 
-
-//   }
-
-
-
 
   return (
     <div className={style.todoItemContainer}>
       {localData.length > 0
         ? localData.map((itemData, idx) => (
             <div key={idx} className={style.todoItem}>
-              <h6>{itemData.name || "No title"}</h6>
-              <div className={style.itemRight}>
+              <input type="checkbox" id={itemData.id} />
+              {editmi === itemData.id ? (
+                <input
+                  type="text"
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                />
+              ) : (
+                <label htmlFor={itemData.id}>
+                  {itemData.name || "No title"}
+                </label>
+              )}
 
-                <button  className={style.editBtn}>
-                  <FontAwesomeIcon icon={faPen} />
-                </button>
+              <div className={style.itemRight}>
+               
+                {editmi === itemData.id ? (
+                  <button
+                    onClick={() => handleSave(itemData.id)}
+                    className={style.saveBtn}
+                  >
+                    <FontAwesomeIcon icon={faSave} />
+                    &&
+                  </button>
+                ) : (
+                  <button className={style.editBtn}>
+                    <FontAwesomeIcon icon={faPen} />
+                  </button>
+                )}
+
                 <button
                   onClick={() => deleteData(itemData.id)}
                   className={style.trashBtn}
